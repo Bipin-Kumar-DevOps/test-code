@@ -1,4 +1,4 @@
 resource "azurerm_resource_group" "rgs" {
-  name = "bk-rg2"
+  name = "bk-rg3"
 location = "eastus"
 }
