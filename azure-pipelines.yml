@@ -18,6 +18,8 @@ steps:
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
+    command: 'plan'
+    environmentServiceNameAzureRM: 'pipeline-connection-infra'
     
 - task: TerraformTaskV4@4
   inputs:
