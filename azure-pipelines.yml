@@ -1,6 +1,6 @@
-name: myyaml-piipeline
+name: myyaml-pipeline
 trigger: none
-pool: Bipin Agent
+pool: "Bipin Agent"
 steps:
 - task: TerraformInstaller@1
   inputs:
@@ -24,7 +24,5 @@ steps:
     provider: 'azurerm'
     command: 'apply'
     commandOptions: '-auto-approve'
-    environmentServiceNameAzureRM: 'pipeline-connection-infra'
-    command: 'plan'
     environmentServiceNameAzureRM: 'pipeline-connection-infra'
 
