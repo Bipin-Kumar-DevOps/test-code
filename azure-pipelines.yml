@@ -1,10 +1,18 @@
-name: myyaml-pipeline
-trigger: none
+name: InfraDeploymentPipeline
 pool: "Bipin Agent"
-steps:
+
+trigger:
+- main
+- dev
+
+jobs:
+  - job: "Terraform-Job"
+    steps:
+      - 
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'
+    
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
@@ -13,18 +21,4 @@ steps:
     backendAzureRmResourceGroupName: 'bipin-rg'
     backendAzureRmStorageAccountName: 'bkumar765'
     backendAzureRmContainerName: 'tfstatecontainer'
-    backendAzureRmKey: 'yamlbipin.tfstate'
-
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    environmentServiceNameAzureRM: 'pipeline-connection-infra'
-    
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'azurerm'
-    command: 'apply'
-    commandOptions: '-auto-approve'
-    environmentServiceNameAzureRM: 'pipeline-connection-infra'
-
+    backendAzureRmKey: 'prod.tfstate'
