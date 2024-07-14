@@ -1,24 +1,34 @@
 name: InfraDeploymentPipeline
-pool: "Bipin Agent"
+pool: Bipin Agent
 
 trigger:
 - main
-- dev
+- develop
 
-jobs:
-  - job: "Terraform-Job"
+stages:
+- stage: Terraforminitplan
+  displayName: Terraform Init
+  pool: Bipin Agent
+  jobs:
+  - job: terraformjob
     steps:
-      - 
-- task: TerraformInstaller@1
-  inputs:
-    terraformVersion: 'latest'
+    - task: tfsec@1
+      inputs:
+        version: 'v1.26.0'
     
-- task: TerraformTaskV4@4
-  inputs:
-    provider: 'azurerm'
-    command: 'init'
-    backendServiceArm: 'pipeline-connection-infra'
-    backendAzureRmResourceGroupName: 'bipin-rg'
-    backendAzureRmStorageAccountName: 'bkumar765'
-    backendAzureRmContainerName: 'tfstatecontainer'
-    backendAzureRmKey: 'prod.tfstate'
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'pipeline-connection-infra'
+        backendAzureRmResourceGroupName: 'bipin-rg'
+        backendAzureRmStorageAccountName: 'bkumar765'
+        backendAzureRmContainerName: 'tfstatecontainer'
+        backendAzureRmKey: 'terra.tfstate'
+
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        environmentServiceNameAzureRM: 'pipeline-connection-infra'
+        
