@@ -16,6 +16,8 @@ stages:
   - job: InitPlan
     steps:
     - task: TerraformTaskV4@4
+      env:
+        TF_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
       inputs:
         provider: 'azurerm'
         command: 'init'
