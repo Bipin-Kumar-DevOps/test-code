@@ -16,8 +16,6 @@ stages:
   - job: InitPlan
     steps:
     - task: TerraformTaskV4@4
-      env:
-        TF_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
       inputs:
         provider: 'azurerm'
         command: 'init'
@@ -26,3 +24,10 @@ stages:
         backendAzureRmStorageAccountName: 'devstgacbk01'
         backendAzureRmContainerName: 'devcont'
         backendAzureRmKey: 'bk.terraform.tfstate'
+    - task: TerraformTaskV4@4
+      env:
+        TF_VAR_subscription_id: $(ARM_SUBSCRIPTION_ID)
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        environmentServiceNameAzureRM: 'Free Trial(2765d1c6-42ae-4328-9ed0-6fb92093c18e)'
