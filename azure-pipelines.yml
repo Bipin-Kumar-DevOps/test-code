@@ -1,0 +1,18 @@
+trigger: 
+ branches:
+  include:
+    - main
+
+pool: bipinpool
+
+variables:
+- group: Azure_Subscription
+- name: ARM_SUBSCRIPTION_ID
+  value: $(ARM_SUBSCRIPTION_ID)
+
+stages:
+- stage: TerrafomInitPlan
+  jobs:
+  - job: InitPlan
+    steps:
+    
