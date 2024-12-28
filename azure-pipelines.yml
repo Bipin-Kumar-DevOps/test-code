@@ -15,4 +15,12 @@ stages:
   jobs:
   - job: InitPlan
     steps:
-    
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        backendServiceArm: 'Free Trial(2765d1c6-42ae-4328-9ed0-6fb92093c18e)'
+        backendAzureRmResourceGroupName: 'dev-rg1'
+        backendAzureRmStorageAccountName: 'devstgacbk01'
+        backendAzureRmContainerName: 'devcont'
+        backendAzureRmKey: 'bk.terraform.tfstate'
