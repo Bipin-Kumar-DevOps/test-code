@@ -19,7 +19,7 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'init'
-        backendServiceArm: 'Free Trial(2765d1c6-42ae-4328-9ed0-6fb92093c18e)'
+        backendServiceArm: 'infra-pipeline-azure'
         backendAzureRmResourceGroupName: 'dev-rg1'
         backendAzureRmStorageAccountName: 'devstgacbk01'
         backendAzureRmContainerName: 'devcont'
@@ -30,4 +30,9 @@ stages:
       inputs:
         provider: 'azurerm'
         command: 'plan'
-        environmentServiceNameAzureRM: 'Free Trial(2765d1c6-42ae-4328-9ed0-6fb92093c18e)'
+        environmentServiceNameAzureRM: 'infra-pipeline-azure'
+    - task: TerraformTaskV4@4
+      inputs:
+        provider: 'azurerm'
+        command: 'apply'
+        environmentServiceNameAzureRM: 'infra-pipeline-azure'
