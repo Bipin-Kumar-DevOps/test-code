@@ -4,3 +4,4 @@ resource "azurerm_resource_group" "rgnew" {
 }
 
 main me changes kiya hai
+2nd time changes kiya hu
